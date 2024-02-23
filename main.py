@@ -4,6 +4,8 @@ import numpy as np
 import os
 import time
 import pygame
+import psutil
+import platform
 
 args = sys.argv
 
@@ -49,6 +51,16 @@ frames = (
 print("配列に格納しました")
 print("動画を再生します")
 
+
+# 優先度の設定
+def lowpriority():
+    proc = psutil.Process( os.getpid )
+    if platform.system() == 'Windows':
+        proc.nice(psutil.REALTIME_PRIORITY_CLASS)
+        print("優先度をリアルタイムに設定")
+    else:
+        proc.nice(-20)
+        print("優先度を-20に設定")
 
 def playMovie():
     # subprocess.Popen(["ffplay", "-nodisp", "-autoexit", "-loglevel", "quiet", movie])
