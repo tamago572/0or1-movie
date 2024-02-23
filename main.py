@@ -54,7 +54,7 @@ print("動画を再生します")
 
 # 優先度の設定
 def lowpriority():
-    proc = psutil.Process( os.getpid )
+    proc = psutil.Process(os.getpid())
     if platform.system() == 'Windows':
         proc.nice(psutil.REALTIME_PRIORITY_CLASS)
         print("優先度をリアルタイムに設定")
@@ -76,6 +76,7 @@ def playMovie():
         time.sleep(1/15)  # フレームレートに合わせて待機
         print("\033c")
 
+lowpriority()
 
 pygame.mixer.init()
 pygame.mixer.music.load(audio)
